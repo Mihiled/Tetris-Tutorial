@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
  //move the teromino left, unless is its at the edge
 function moveLeft() {
-    console.log('wee')
     undraw()
     const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
 
@@ -115,6 +114,35 @@ function moveLeft() {
 
     draw()
 }
+//move the tetromino right
+function moveRight() {
+    undraw()
+    const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+
+    if(!isAtRightEdge) currentPosition +=1
+
+    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition -=1
+    }
+
+    draw()
+}
+
+
+//rotate the tetromino
+function rotate() {
+    undraw()
+    currentRotation ++
+    if(currentRotation === current.length) {
+        currentRotation = 0
+    }
+    current = theTetrominoes[random][currentRotation]
+    draw()
+}
+
+
+
+
 
 
 
